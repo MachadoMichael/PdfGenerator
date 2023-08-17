@@ -18,8 +18,7 @@ public class PdfResource {
     @PostMapping("/generateAndSend")
     public String generateAndSend(@RequestBody PdfRequestDTO pdfRequest) throws DocumentException {
         Pdf pdf = new Pdf(pdfRequest.documentData());
-        Email email = new Email(pdfRequest.recipientEmail());
-        email.send(pdf.getFile());
+        Email.send(pdf.getFile(), pdfRequest.recipientsEmail());
         return null;
     }
 }

@@ -1,4 +1,6 @@
 package com.mcubed.pdfGenerator.dto;
 
-public record PdfRequestDTO(String recipientEmail, String documentData) {
+import java.util.List;
+
+public record PdfRequestDTO(List<String> recipientsEmail, String documentData) {
 }

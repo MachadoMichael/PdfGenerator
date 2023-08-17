@@ -1,14 +1,12 @@
 package com.mcubed.pdfGenerator.entities;
 
+import java.util.List;
+
 public class Email {
 
-    private String recipientEmail;
-    public Email(String recipientEmail) {
-        this.recipientEmail = recipientEmail;
-    }
 
-    public void send(byte[] pdfBytes){
-
+    public static void send(byte[] pdfBytes, List<String> recipientsEmail){
+    // percorrer a lista enviando email para cada recipientEmail
     }
 
 }
