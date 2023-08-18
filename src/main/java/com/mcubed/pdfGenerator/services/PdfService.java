@@ -1,14 +1,14 @@
-package com.mcubed.pdfGenerator.entities;
+package com.mcubed.pdfGenerator.services;
 import com.lowagie.text.DocumentException;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.*;
 
-public class Pdf{
+public class PdfService {
 
     private final byte[] file;
 
-    public Pdf(String documentData) throws DocumentException {
+    public PdfService(String documentData) throws DocumentException {
 
         ByteArrayOutputStream pdfOutputStream = new ByteArrayOutputStream();
         String html = "<!DOCTYPE html>\n" +
