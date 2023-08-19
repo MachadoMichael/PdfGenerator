@@ -1,5 +1,6 @@
 package com.mcubed.pdfGenerator.services;
 import com.lowagie.text.DocumentException;
+import com.mcubed.pdfGenerator.entities.Html;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.*;
@@ -11,21 +12,9 @@ public class PdfService {
     public PdfService(String documentData) throws DocumentException {
 
         ByteArrayOutputStream pdfOutputStream = new ByteArrayOutputStream();
-        String html = "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\"></meta>\n" +
-                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"></meta>\n" +
-                "    <title>Document</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "    \n" +
-                documentData +
-                "    \n" +
-                "</body>\n" +
-                "</html>";
+        Html html = new Html(documentData);
         ITextRenderer renderer = new ITextRenderer();
-        renderer.setDocumentFromString(html);
+        renderer.setDocumentFromString(html.getFull());
         renderer.layout();
         renderer.createPDF(pdfOutputStream);
 

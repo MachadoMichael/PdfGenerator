@@ -1,7 +1,9 @@
 package com.mcubed.pdfGenerator.controllers;
 
 import com.lowagie.text.DocumentException;
+import com.mcubed.pdfGenerator.config.SmtpConfig;
 import com.mcubed.pdfGenerator.dto.PdfRequest;
+import com.mcubed.pdfGenerator.entities.MailSender;
 import com.mcubed.pdfGenerator.services.EmailService;
 import com.mcubed.pdfGenerator.services.PdfService;
 
@@ -20,7 +22,9 @@ public class PdfResource {
     @PostMapping("/generateAndSend")
     public String generateAndSend(@RequestBody PdfRequest pdfRequest) throws DocumentException {
         PdfService pdf = new PdfService(pdfRequest.documentData());
-        EmailService email = new EmailService();
+        SmtpConfig smtpConfig = new SmtpConfig();
+        MailSender mailSender = new MailSender(smtpConfig);
+        EmailService email = new EmailService(mailSender.getMailSender());
         email.send(pdf.getFile(), pdfRequest.recipientsEmail());
         return null;
     }
