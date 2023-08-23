@@ -2,22 +2,12 @@ package com.mcubed.pdfGenerator.entities;
 
 public class Html {
     private final String full;
-    private String body;
 
     public String getFull() {
         return full;
     }
 
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
     public Html(String body) {
-        this.body = body;
         this.full = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
