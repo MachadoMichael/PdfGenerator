@@ -1,32 +1,18 @@
 package com.mcubed.pdfGenerator.services;
 
 import com.lowagie.text.DocumentException;
-import com.mcubed.pdfGenerator.entities.Html;
-import org.xhtmlrenderer.pdf.ITextRenderer;
+import com.mcubed.pdfGenerator.entities.Pdf;
+import org.springframework.stereotype.Service;
 
-import java.io.*;
-
+@Service
 public class PdfService {
 
-    private final byte[] file;
+    public byte[] generateFile(Pdf pdf) throws DocumentException {
 
-    public PdfService(String documentData) {
-        try {
-            ByteArrayOutputStream pdfOutputStream = new ByteArrayOutputStream();
-            Html html = new Html(documentData);
-            ITextRenderer renderer = new ITextRenderer();
-            renderer.setDocumentFromString(html.getFull());
-            renderer.layout();
-            renderer.createPDF(pdfOutputStream);
-
-            this.file = pdfOutputStream.toByteArray();
-        } catch (DocumentException e) {
-            throw new RuntimeException(e);
-        }
-
+        pdf.getRenderer().setDocumentFromString(pdf.getHtmlContent());
+        pdf.getRenderer().layout();
+        pdf.getRenderer().createPDF(pdf.getPdfOutputStream());
+        return pdf.getPdfOutputStream().toByteArray();
     }
 
-    public byte[] getFile() {
-        return file;
-    }
 }
