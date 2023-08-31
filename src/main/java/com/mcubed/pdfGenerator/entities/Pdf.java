@@ -8,11 +8,11 @@ import java.io.ByteArrayOutputStream;
 
 public class Pdf {
 
-    private ByteArrayOutputStream pdfOutputStream;
-    private ITextRenderer renderer;
-    private String htmlContent;
+    private final ByteArrayOutputStream pdfOutputStream;
+    private final ITextRenderer renderer;
+    private final String htmlContent;
 
-    public Pdf(String bodyHtml) {
+    public Pdf(String documentData) {
         pdfOutputStream = new ByteArrayOutputStream();
         renderer = new ITextRenderer();
 
@@ -25,7 +25,7 @@ public class Pdf {
                 "</head>\n" +
                 "<body>\n" +
                 "    \n" +
-                bodyHtml +
+                documentData +
                 "    \n" +
                 "</body>\n" +
                 "</html>";
@@ -34,24 +34,10 @@ public class Pdf {
     public String getHtmlContent() {
         return htmlContent;
     }
-
-    public void setHtmlContent(String htmlContent) {
-        this.htmlContent = htmlContent;
-    }
-
     public ByteArrayOutputStream getPdfOutputStream() {
         return pdfOutputStream;
     }
-
-    public void setPdfOutputStream(ByteArrayOutputStream pdfOutputStream) {
-        this.pdfOutputStream = pdfOutputStream;
-    }
-
     public ITextRenderer getRenderer() {
         return renderer;
-    }
-
-    public void setRenderer(ITextRenderer renderer) {
-        this.renderer = renderer;
     }
 }
